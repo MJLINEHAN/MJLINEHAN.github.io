@@ -30,6 +30,7 @@ img{
 
 .header{
 	float:center;
+	max-width:100%
 	background-color:#ffffff;
 	height:150px;
 	
