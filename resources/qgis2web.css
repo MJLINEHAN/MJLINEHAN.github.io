@@ -14,7 +14,11 @@ th, td {
 #map {
 	background-color:#dfefff;
     min-width: 100%;
+<<<<<<< HEAD
     height: 80%;
+=======
+    min-height: 400px;
+>>>>>>> 03a753d592e7cd4b6c0899662f5bd7022c5bd96e
 	border:solid 2px #000000;
 }
 
@@ -30,6 +34,7 @@ img{
 
 .header{
 	float:center;
+	max-width:100%
 	background-color:#ffffff;
 	height:150px;
 	
