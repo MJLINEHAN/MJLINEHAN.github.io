@@ -14,7 +14,7 @@ th, td {
 #map {
 	background-color:#dfefff;
     min-width: 100%;
-    height: auto;
+    height: 70%;
 	border:solid 2px #000000;
 }
 
