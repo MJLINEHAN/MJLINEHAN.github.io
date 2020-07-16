@@ -195,8 +195,8 @@ var onPointerMove = function(evt) {
 							document.close(popupfile);*/
 							
 							
-							paysage = paysage+' - Full Info Page'
-							paysagelink = paysage.link(pagefile);
+							paysage = paysage
+							//paysagelink = paysage.link(pagefile);
 							
                         } else {
                             popupField += (currentFeature.get(currentFeatureKeys[i]) != null ? '<img src="images/' + currentFeature.get(currentFeatureKeys[i]).replace(/[\\\/:]/g, '_').trim()  + '" /></td>' : '');
@@ -270,7 +270,7 @@ var onPointerMove = function(evt) {
     if (doHover) {
         if (popupText) {
             overlayPopup.setPosition(coord);
-            content.innerHTML = paysage+ '<iframe style="width:100%;height:110px;border:0px;"src="' + popupfile+'"></iframe>';
+            content.innerHTML = paysage + '<iframe style="width:100%;height:110px;border:0px;"src="' + popupfile+'"></iframe>';
             container.style.display = 'block';        
         } else {
             container.style.display = 'none';
