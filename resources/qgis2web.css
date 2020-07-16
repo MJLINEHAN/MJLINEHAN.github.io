@@ -86,8 +86,8 @@ img{
 }
 
 #popup{
-    max-height:300px;
-    min-width: 200px;
+    min-height:150px;
+    min-width: 375px;
 	
 }
 
