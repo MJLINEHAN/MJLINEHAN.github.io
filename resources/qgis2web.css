@@ -44,21 +44,14 @@ img{
 }
 
 .ol-popup {
-    display: none;
+    
     position: fixed;
     background-color: white;
-    -moz-box-shadow: 0 1px 4px rgba(0,0,0,0.2);
-    -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-    filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+	
     padding: 15px;
     border: 3px solid #000000;
-    
 	overflow: scroll;
-	-webkit-transform: translate(-50%, -50%);
-	-moz-transform: translate(-50%, -50%);
-	-ms-transform: translate(-50%, -50%);
-	-o-transform: translate(-50%, -50%);
-	transform: translate(-50%, -50%);
+	
 }
 
 .ol-popup-closer {
@@ -93,6 +86,8 @@ img{
 #popup{
     max-height:100px;
     min-width: 300px;
+	top: calc(50% - 25px); 
+	left: calc(50% - 80px);
 }
 
 #popup-content>ul>li:nth-child(even) {

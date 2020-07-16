@@ -58,19 +58,13 @@
         <div id="map">
             <div id="popup" class="ol-popup">
 				<script>
-					function PopUp(hideOrshow) {
-					    if (hideOrshow == 'hide') document.getElementById('popup').style.display = "none";
-					    else document.getElementById('popup').removeAttribute('style');
-					}
-					window.onload = function () {
-					    setTimeout(function () {
-					        PopUp('show');
-					    }, 0);
-					}
-
-					function hideNow(e) {
-					    if (e.target.id == 'popup') document.getElementById('popup').style.display = 'none';
-					}
+					$(function(){
+					    $('#full-width').draggable({
+					      handle: ".modal-header"
+					  });
+					    $('#full-width').resizable();
+  
+					});
 				</script>
 					
                 <a href="#" id="popup-closer" class="ol-popup-closer"></a>
