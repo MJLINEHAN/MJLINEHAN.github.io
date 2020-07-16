@@ -186,7 +186,7 @@ var onPointerMove = function(evt) {
 							paysage = JSON.stringify(currentFeature.get(currentFeatureKeys[1]));// Grabs country name
 							paysage=JSON.parse(paysage);
 							popupfile= 'CountryData/'+paysage+'/'+paysage+'_Popup.htm';
-							pagefile = 'CountryData/'+paysage+'/'+paysage+'_Page.html';
+							//pagefile = 'CountryData/'+paysage+'/'+paysage+'_Page.html';
 							
 							/*document.open(popupfile);
 							base = document.createElement('base');
@@ -195,8 +195,9 @@ var onPointerMove = function(evt) {
 							document.close(popupfile);*/
 							
 							
-							paysage = paysage+' - Full Info Page'
-							paysagelink = paysage.link(pagefile);
+							paysage = popupfile
+							//paysagelink = paysage.link(pagefile);
+							//paysage=paysagelink;
                         } else {
                             popupField += (currentFeature.get(currentFeatureKeys[i]) != null ? '<img src="images/' + currentFeature.get(currentFeatureKeys[i]).replace(/[\\\/:]/g, '_').trim()  + '" /></td>' : '');
                         }
@@ -269,7 +270,7 @@ var onPointerMove = function(evt) {
     if (doHover) {
         if (popupText) {
             overlayPopup.setPosition(coord);
-            content.innerHTML = paysagelink+ '<iframe style="width:100%;height:110px;border:0px;"src="' + popupfile+'"></iframe>';
+            content.innerHTML = Paysage+ '<iframe style="width:100%;height:110px;border:0px;"src="' + popupfile+'"></iframe>';
             container.style.display = 'block';        
         } else {
             container.style.display = 'none';
