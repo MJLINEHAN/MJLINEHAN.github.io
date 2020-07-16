@@ -270,7 +270,7 @@ var onPointerMove = function(evt) {
     if (doHover) {
         if (popupText) {
             overlayPopup.setPosition(coord);
-            content.innerHTML = paysage+ '<iframe style="width:100%;height:110px;border:0px;"src="' + popupfile+'"></iframe>';
+            content.innerHTML = paysagelink+ '<iframe style="width:100%;height:110px;border:0px;"src="' + popupfile+'"></iframe>';
             container.style.display = 'block';        
         } else {
             container.style.display = 'none';
