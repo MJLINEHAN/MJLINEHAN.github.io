@@ -270,6 +270,7 @@ var onPointerMove = function(evt) {
     if (doHover) {
         if (popupText) {
             overlayPopup.setPosition(coord);
+			map.getView().setCenter(pixel);
             content.innerHTML = '<b>'+paysage+'</b>' + '<iframe style="width:100%;height:200px;border:0px;"src="' + popupfile+'"></iframe>';
             container.style.display = 'block';        
         } else {
