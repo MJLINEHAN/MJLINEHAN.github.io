@@ -27,14 +27,17 @@ img{
 	height:auto;
 }
 
-
-.header{
-	float:center;
-	max-width:100%
-	background-color:#ffffff;
-	height:6.5%;
-	
+.titlebar
+{
+    text-align: center;
+    padding: 40px 0;
+    background-color: #ffffff;
+    font-weight:bold;
+	font-size:15px;
+    color: #000000;
+    position: relative;
 }
+.titlebar img { position: absolute; left: 10px; top: 10%; width:18%; height:auto;}
 
 .footer{
 	padding:10px;
