@@ -31,7 +31,8 @@ img{
 
 .titlebar
 {
-    text-align: center;
+	height:7%;
+    
     padding: 40px 0;
     background-color: #ffffff;
     font-weight:bold;
@@ -39,7 +40,11 @@ img{
    
     position: relative;
 }
-.titlebar img { position: absolute; left: 10px; top: 10%; width:auto; height:85%;}
+
+.titlebar h3{
+	float:center;
+}
+.titlebar img { position: absolute; left: 10px; top: 15%; width:auto; height:70%;}
 
 .footer{
 	padding:10px;
@@ -49,7 +54,7 @@ img{
 }
 
 .ol-popup {
-   
+   height:75vw;
 	
 }
 
@@ -84,12 +89,13 @@ img{
 
 #popup{
     position:relative;
-	top:-100px;
+	top:-150px;
 	left:-50%;
 	
 	display:inline-block;
     background-color: white;
-    max-height:50vw;
+    height:auto;
+	
 	min-width:40vw;
     max-width:55vw;
 	

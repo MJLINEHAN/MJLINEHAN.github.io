@@ -51,7 +51,7 @@ lyr_ne_10m_lakes_2.set('fieldAliases', {});
 
 lyr_LocalContentCountries_1.set('fieldImages', {'COUNTRY': 'TextEdit', 'POPULATION': 'Population', 'MinRent':'TextEdit','Legislation':'TextEdit', 'Leg1':'TextEdit','Leg2':'TextEdit','Adtl':'TextEdit','Adtl1':'TextEdit' });
 lyr_ne_10m_lakes_2.set('fieldImages', {});
-lyr_OtherCountries_0.set('fieldLabels', {'COUNTRY': 'no label', });
+lyr_OtherCountries_0.set('fieldLabels', {'COUNTRY': 'no label' });
 lyr_LocalContentCountries_1.set('fieldLabels', {'COUNTRY': 'inline label', 'POP': 'inline label', 'MinRent':'inline label', 'Legislation':'inline label', 'Leg1':'headline','Leg2':'headline','Adtl':'inline label','Adtl1':'' });
 lyr_ne_10m_lakes_2.set('fieldLabels', {});
 lyr_ne_10m_lakes_2.on('precompose', function(evt) {

@@ -104,8 +104,10 @@ var onPointerMove = function(evt) {
     var popupText = '<ul>';
 	var paysage;//added
 	var paysagelink//added
-	var popupfile;//added
+	var popupfile='';//added
 	var base;
+	var shouldhighlight=false
+	
     map.forEachFeatureAtPixel(pixel, function(feature, layer) {
         // We only care about features from layers in the layersList, ignore
         // any other layers which the map might contain such as the vector
@@ -113,13 +115,21 @@ var onPointerMove = function(evt) {
         if (layersList.indexOf(layer) === -1) {
             return;
         }
+        if (layersList.indexOf(layer) === 1) {
+            shouldhighlight=true;
+        }
+		
+	
         var doPopup = false;
+		
+		
         for (k in layer.get('fieldImages')) {
             if (layer.get('fieldImages')[k] != "Hidden") {
                 doPopup = true;
+				
             }
         }
-		//paysage = layer.get('fieldImages')[0]
+        
 		
 		
 		
@@ -215,57 +225,73 @@ var onPointerMove = function(evt) {
 			
         }
 		
+
+		
     });
+	
+  
+	
+	
     if (popupText == '<ul>') {
         popupText = '';
     } else {
         popupText += '</ul>';
     }
 
+
     if (doHighlight) {
-        if (currentFeature !== highlight) {
-            if (highlight) {
-                featureOverlay.getSource().removeFeature(highlight);
-            }
-            if (currentFeature) {
-                var styleDefinition = currentLayer.getStyle().toString();
+	
+	        if (currentFeature !== highlight) {
+	            if (highlight) {
+	                featureOverlay.getSource().removeFeature(highlight);
+	            }
+	            if (currentFeature) {
+					
+					if (currentLayer.get('name')==="LocalContentCountries_1"){
+					
+		                var styleDefinition = currentLayer.getStyle().toString();
 
-                if (currentFeature.getGeometry().getType() == 'Point') {
-                    var radius = styleDefinition.split('radius')[1].split(' ')[1];
+		                if (currentFeature.getGeometry().getType() == 'Point') {
+		                    var radius = styleDefinition.split('radius')[1].split(' ')[1];
 
-                    highlightStyle = new ol.style.Style({
-                        image: new ol.style.Circle({
-                            fill: new ol.style.Fill({
-                                color: "#ffff00"
-                            }),
-                            radius: radius
-                        })
-                    })
-                } else if (currentFeature.getGeometry().getType() == 'LineString') {
+		                    highlightStyle = new ol.style.Style({
+		                        image: new ol.style.Circle({
+		                            fill: new ol.style.Fill({
+		                                color: "#ffff00"
+		                            }),
+		                            radius: radius
+		                        })
+		                    })
+		                } else if (currentFeature.getGeometry().getType() == 'LineString') {
 
-                    var featureWidth = styleDefinition.split('width')[1].split(' ')[1].replace('})','');
+		                    var featureWidth = styleDefinition.split('width')[1].split(' ')[1].replace('})','');
 
-                    highlightStyle = new ol.style.Style({
-                        stroke: new ol.style.Stroke({
-                            color: '#ffff00',
-                            lineDash: null,
-                            width: featureWidth
-                        })
-                    });
+		                    highlightStyle = new ol.style.Style({
+		                        stroke: new ol.style.Stroke({
+		                            color: '#ffff00',
+		                            lineDash: null,
+		                            width: featureWidth
+		                        })
+		                    });
 
-                } else {
-                    highlightStyle = new ol.style.Style({
-                        fill: new ol.style.Fill({
-                            color: '#ffff00'
-                        })
-                    })
-                }
-                featureOverlay.getSource().addFeature(currentFeature);
-                featureOverlay.setStyle(highlightStyle);
-            }
-            highlight = currentFeature;
-        }
+		                } else {
+		                    highlightStyle = new ol.style.Style({
+		                        fill: new ol.style.Fill({
+		                            color: '#ffff00'
+		                        })
+		                    })
+		                }
+		                featureOverlay.getSource().addFeature(currentFeature);
+		                featureOverlay.setStyle(highlightStyle);
+					
+					}
+	            }
+				
+	            highlight = currentFeature;
+	        }
+		
     }
+
 //'<iframe style="width:100%;height:110px;border:0px;"src="' + popupfile+'"></iframe>';
     if (doHover) {
         if (popupText) {
@@ -326,7 +352,7 @@ var onSingleClick = function(evt) {
 		   
 		    if (doPopup) {
 				
-				var countrydata=feature.get("features"); // features at given pixel
+				/*var countrydata=feature.get("features"); // features at given pixel
 				var countrydatatypes = countrydata[0]; // retrieves either type or properties
 				var proporties=countrydatatypes.getKeys(); // establishes country info keys: COUNTRY, POP etc.. (not geometry)*/
 				paysage = countrydatatypes.get(proporties[0]);
@@ -418,8 +444,9 @@ var onSingleClick = function(evt) {
 	
     if (popupText) {
         overlayPopup.setPosition(coord);
-		map.getView().setCenter(pixel);
-        content.innerHTML = '<b>'+paysage+'</b>' + '<iframe style="width:100%;height:200px;border:0px;"src="' + popupfile+'"></iframe>';
+		map.getView().setCenter(coord);
+		map.getView().setZoom(5);
+        content.innerHTML = '<b>'+paysage+'</b>' + '<iframe style="width:100%;min-height:280px;max-height:400px;border:0px;"src="' + popupfile+'"></iframe>';
         container.style.display = 'block';        
     } else {
         container.style.display = 'none';
