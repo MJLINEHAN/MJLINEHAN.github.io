@@ -106,7 +106,8 @@ var onPointerMove = function(evt) {
 	var paysagelink//added
 	var popupfile='';//added
 	var base;
-	var shouldhighlight=false
+	var shouldhighlight=false;
+	var highlightlayer;
 	
     map.forEachFeatureAtPixel(pixel, function(feature, layer) {
         // We only care about features from layers in the layersList, ignore
@@ -119,7 +120,8 @@ var onPointerMove = function(evt) {
             shouldhighlight=true;
         }
 		
-	
+		highlightlayer=layersList.indexOf(layer);//If this is 1 it is the interactive layer we want to highlight - ML
+		
         var doPopup = false;
 		
 		
@@ -224,8 +226,7 @@ var onPointerMove = function(evt) {
 			
 			
         }
-		
-
+      
 		
     });
 	
@@ -239,58 +240,53 @@ var onPointerMove = function(evt) {
     }
 
 
-    if (doHighlight) {
-	
+	if (highlightlayer==1){
+	    if (doHighlight) {
 	        if (currentFeature !== highlight) {
 	            if (highlight) {
 	                featureOverlay.getSource().removeFeature(highlight);
 	            }
 	            if (currentFeature) {
 					
-					if (currentLayer.get('name')==="LocalContentCountries_1"){
-					
-		                var styleDefinition = currentLayer.getStyle().toString();
+	                var styleDefinition = currentLayer.getStyle().toString();
 
-		                if (currentFeature.getGeometry().getType() == 'Point') {
-		                    var radius = styleDefinition.split('radius')[1].split(' ')[1];
+	                if (currentFeature.getGeometry().getType() == 'Point') {
+	                    var radius = styleDefinition.split('radius')[1].split(' ')[1];
 
-		                    highlightStyle = new ol.style.Style({
-		                        image: new ol.style.Circle({
-		                            fill: new ol.style.Fill({
-		                                color: "#ffff00"
-		                            }),
-		                            radius: radius
-		                        })
-		                    })
-		                } else if (currentFeature.getGeometry().getType() == 'LineString') {
+	                    highlightStyle = new ol.style.Style({
+	                        image: new ol.style.Circle({
+	                            fill: new ol.style.Fill({
+	                                color: "#ffff00"
+	                            }),
+	                            radius: radius
+	                        })
+	                    })
+	                } else if (currentFeature.getGeometry().getType() == 'LineString') {
 
-		                    var featureWidth = styleDefinition.split('width')[1].split(' ')[1].replace('})','');
+	                    var featureWidth = styleDefinition.split('width')[1].split(' ')[1].replace('})','');
 
-		                    highlightStyle = new ol.style.Style({
-		                        stroke: new ol.style.Stroke({
-		                            color: '#ffff00',
-		                            lineDash: null,
-		                            width: featureWidth
-		                        })
-		                    });
+	                    highlightStyle = new ol.style.Style({
+	                        stroke: new ol.style.Stroke({
+	                            color: '#ffff00',
+	                            lineDash: null,
+	                            width: featureWidth
+	                        })
+	                    });
 
-		                } else {
-		                    highlightStyle = new ol.style.Style({
-		                        fill: new ol.style.Fill({
-		                            color: '#ffff00'
-		                        })
-		                    })
-		                }
-		                featureOverlay.getSource().addFeature(currentFeature);
-		                featureOverlay.setStyle(highlightStyle);
-					
-					}
+	                } else {
+	                    highlightStyle = new ol.style.Style({
+	                        fill: new ol.style.Fill({
+	                            color: '#ffff00'
+	                        })
+	                    })
+	                }
+	                featureOverlay.getSource().addFeature(currentFeature);
+	                featureOverlay.setStyle(highlightStyle);
 	            }
-				
 	            highlight = currentFeature;
 	        }
-		
-    }
+	    }
+	}
 
 //'<iframe style="width:100%;height:110px;border:0px;"src="' + popupfile+'"></iframe>';
     if (doHover) {
@@ -313,6 +309,7 @@ var onSingleClick = function(evt) {
     if (sketch) {
         return;
     }
+	var temp;
     var pixel = map.getEventPixel(evt.originalEvent);
     var coord = evt.coordinate;
     var popupField;
@@ -344,6 +341,9 @@ var onSingleClick = function(evt) {
 		
         currentFeature = feature;
         currentLayer = layer;
+		
+		
+		
         clusteredFeatures = feature.get("features"); // retrieves features at given pixel
         var clusterFeature;
         if (typeof clusteredFeatures !== "undefined") {
@@ -435,6 +435,7 @@ var onSingleClick = function(evt) {
         }
 		
     });
+   
     if (popupText == '<ul>') {
         popupText = '';
     } else {
