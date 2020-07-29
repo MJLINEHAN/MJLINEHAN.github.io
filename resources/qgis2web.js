@@ -116,10 +116,7 @@ var onPointerMove = function(evt) {
         if (layersList.indexOf(layer) === -1) {
             return;
         }
-        if (layersList.indexOf(layer) === 1) {
-            shouldhighlight=true;
-        }
-		
+        
 		highlightlayer=layersList.indexOf(layer);//If this is 1 it is the interactive layer we want to highlight - ML
 		
         var doPopup = false;
@@ -239,54 +236,71 @@ var onPointerMove = function(evt) {
         popupText += '</ul>';
     }
 
-
-	if (highlightlayer==1){
-	    if (doHighlight) {
-	        if (currentFeature !== highlight) {
-	            if (highlight) {
-	                featureOverlay.getSource().removeFeature(highlight);
-	            }
+	
+    
+//The highlight feature has been modified from the default QGIS2WEB structure to only highlight when the added "highlightlayer" variable is indexed to the layers for which popup windows with additional info is available
+	if (doHighlight) {
+        if (currentFeature !== highlight) {
+            if (highlightlayer==0) {
+                featureOverlay.getSource().removeFeature(highlight);
+            }
+			
 	            if (currentFeature) {
 					
 	                var styleDefinition = currentLayer.getStyle().toString();
 
 	                if (currentFeature.getGeometry().getType() == 'Point') {
-	                    var radius = styleDefinition.split('radius')[1].split(' ')[1];
+						
+		                    var radius = styleDefinition.split('radius')[1].split(' ')[1];
 
-	                    highlightStyle = new ol.style.Style({
-	                        image: new ol.style.Circle({
-	                            fill: new ol.style.Fill({
-	                                color: "#ffff00"
-	                            }),
-	                            radius: radius
-	                        })
-	                    })
+		                    highlightStyle = new ol.style.Style({
+		                        image: new ol.style.Circle({
+		                            fill: new ol.style.Fill({
+		                                color: "#ffff00"
+		                            }),
+		                            radius: radius
+		                        })
+		                    })
+						
 	                } else if (currentFeature.getGeometry().getType() == 'LineString') {
+						
+		                    var featureWidth = styleDefinition.split('width')[1].split(' ')[1].replace('})','');
 
-	                    var featureWidth = styleDefinition.split('width')[1].split(' ')[1].replace('})','');
-
-	                    highlightStyle = new ol.style.Style({
-	                        stroke: new ol.style.Stroke({
-	                            color: '#ffff00',
-	                            lineDash: null,
-	                            width: featureWidth
-	                        })
+		                    highlightStyle = new ol.style.Style({
+		                        stroke: new ol.style.Stroke({
+		                            color: '#ffff00',
+		                            lineDash: null,
+		                            width: featureWidth
+		                        })
+							
 	                    });
+					
 
 	                } else {
-	                    highlightStyle = new ol.style.Style({
-	                        fill: new ol.style.Fill({
-	                            color: '#ffff00'
-	                        })
-	                    })
+						
+		                    highlightStyle = new ol.style.Style({
+		                        fill: new ol.style.Fill({
+		                            color: '#ffff00'
+		                        })
+		                    })
+						
 	                }
-	                featureOverlay.getSource().addFeature(currentFeature);
-	                featureOverlay.setStyle(highlightStyle);
+					
+		            
+					if (highlightlayer==1){
+					 	featureOverlay.getSource().addFeature(currentFeature);
+			            featureOverlay.setStyle(highlightStyle);
+					}
+					
 	            }
-	            highlight = currentFeature;
-	        }
+				
+	           	highlight = currentFeature;
 	    }
 	}
+    
+	
+	
+	
 
 //'<iframe style="width:100%;height:110px;border:0px;"src="' + popupfile+'"></iframe>';
     if (doHover) {
