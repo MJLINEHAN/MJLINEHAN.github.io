@@ -240,8 +240,10 @@ var onPointerMove = function(evt) {
     
 //The highlight feature has been modified from the default QGIS2WEB structure to only highlight when the added "highlightlayer" variable is indexed to the layers for which popup windows with additional info is available
 	if (doHighlight) {
+		
         if (currentFeature !== highlight) {
-            if (highlightlayer==0) {
+			
+            if (highlightlayer==0 || !currentFeature) {
                 featureOverlay.getSource().removeFeature(highlight);
             }
 			
@@ -290,11 +292,12 @@ var onPointerMove = function(evt) {
 					if (highlightlayer==1){
 					 	featureOverlay.getSource().addFeature(currentFeature);
 			            featureOverlay.setStyle(highlightStyle);
+						
 					}
 					
 	            }
 				
-	           	highlight = currentFeature;
+	         highlight = currentFeature;  	
 	    }
 	}
     
