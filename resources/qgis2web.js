@@ -422,7 +422,7 @@ var onSingleClick = function(evt) {
 							paysage = JSON.stringify(currentFeature.get(currentFeatureKeys[1]));// Grabs country name
 							paysage=JSON.parse(paysage);
 							popupfile= 'CountryData/'+paysage+'/'+paysage+'_Popup.htm';
-							pagefile = 'CountryData/'+paysage+'/'+paysage+'_Page.html';
+							pagefile = 'CountryData/'+paysage+'/'+paysage+'Page.html';
 							
 							/*document.open(popupfile);
 							base = document.createElement('base');
@@ -430,9 +430,12 @@ var onSingleClick = function(evt) {
 							document.head.appendChild(base);
 							document.close(popupfile);*/
 							
+							var temp="View Full Page";
 							
-							paysage = paysage
-							//paysagelink = paysage.link(pagefile);
+							
+							paysagelink = temp.link(pagefile);
+							
+						
 							
                         } else {
                             popupField += (currentFeature.get(currentFeatureKeys[i]) != null ? '<img src="images/' + currentFeature.get(currentFeatureKeys[i]).replace(/[\\\/:]/g, '_').trim()  + '" /></td>' : '');
@@ -464,7 +467,7 @@ var onSingleClick = function(evt) {
         overlayPopup.setPosition(coord);
 		map.getView().setCenter(coord);
 		map.getView().setZoom(5);
-        content.innerHTML = '<b>'+paysage+'</b>' + '<iframe style="width:100%;min-height:280px;max-height:400px;border:0px;"src="' + popupfile+'"></iframe>';
+        content.innerHTML = '<p align="left">'+paysagelink+ '</p><b>'+paysage+'</b> <iframe style="width:100%;min-height:280px;max-height:400px;border:0px;"src="' + popupfile+'"></iframe>';
         container.style.display = 'block';        
     } else {
         container.style.display = 'none';

@@ -49,6 +49,13 @@ img{
 .footer{
 	padding:10px;
 	margin:10px;
+	border-style:solid, 2px, #000000;
+	border-radius: 10px;
+	background-color:#ffffff;
+}
+.footer2{
+	padding:10px;
+	margin:10px;
 	height:100px;
 	background-color:#ffffff;
 }
