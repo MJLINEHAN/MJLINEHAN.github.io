@@ -45,10 +45,34 @@
             background: rgba(255, 255, 255, 0.5) !important;
             color: black !important;
         }
+		
+		
+		.collapsible {
+		  background-color: #eee;
+		  color: #444;
+		  cursor: pointer;
+		  padding: 18px;
+		  width: 100%;
+		  border: none;
+		  text-align: left;
+		  outline: none;
+		  font-size: 15px;
+		}
+
+		/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+		.active, .collapsible:hover {
+		  background-color: #ccc;
+		}
+
+		/* Style the collapsible content. Note: hidden by default */
+		.content {
+		  padding: 0 18px;
+		  display: none;
+		  overflow: hidden;
+		  background-color: #f1f1f1;
+		}
         </style>
-        <style>
-        
-        </style>
+       
         <title></title>
     </head>
     <body>
@@ -82,6 +106,35 @@
         <script src="./resources/Autolinker.min.js"></script>
         <script src="./resources/qgis2web.js"></script>
 		<div class ="footer">
+			
+			<button type="button" class="collapsible">Select a country from the list (Click Here) or search the map</button>
+			<div class="content">
+			  <ul>
+			  	<li><a href="CountryData/Ghana/GhanaPage.html">Ghana</a></li>
+				<li><a href="CountryData/Zambia/ZambiaPage.html">Zambia</a></li>
+			  </ul>
+			</div>
+			<script>
+				var coll = document.getElementsByClassName("collapsible");
+				var i;
+
+				for (i = 0; i < coll.length; i++) {
+				  coll[i].addEventListener("click", function() {
+				    this.classList.toggle("active");
+				    var content = this.nextElementSibling;
+				    if (content.style.display === "block") {
+				      content.style.display = "none";
+				    } else {
+				      content.style.display = "block";
+				    }
+				  });
+				}
+			</script>
+			
+			<div class="content">
+			  <p>Lorem ipsum...</p>
+			</div>
+			
 			<h1>ELLED Map</h1>
 			<h3>This map is still under development</h3>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
